@@ -1,16 +1,18 @@
 package com.example.languagebooster.adaptors
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.languagebooster.R
 import com.example.languagebooster.models.Word
 import soup.neumorphism.NeumorphImageButton
 import soup.neumorphism.NeumorphImageView
 
-class RcyclerviewAdaptor(private val words: ArrayList<Word>) :
+class RcyclerviewAdaptor(private val context: Context, private val words: ArrayList<Word>) :
     RecyclerView.Adapter<RcyclerviewAdaptor.WordHolder>() {
 
 
@@ -35,6 +37,14 @@ class RcyclerviewAdaptor(private val words: ArrayList<Word>) :
             words[position].stared = !words[position].stared
             setStarImage(holder, words[position])
         }
+
+
+        Glide
+            .with(context)
+            .load("https://picsum.photos/70?rand=" + System.currentTimeMillis())
+            .centerCrop()
+            .placeholder(R.drawable.loading_spinner)
+            .into(holder.img);
     }
 
 
