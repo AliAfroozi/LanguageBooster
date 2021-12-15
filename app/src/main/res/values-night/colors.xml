@@ -12,4 +12,6 @@
     <color name="second_background">#13171A</color>
     <color name="light_shadow">#373D44</color>
     <color name="dark_shadow">#18181A</color>
+
+    <color name="splash_background">#D86411</color>
 </resources>

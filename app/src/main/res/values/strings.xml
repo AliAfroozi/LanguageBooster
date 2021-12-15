@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Language Booster</string>
     <string name="language_booster">Language Booster</string>
+    <string name="close_app">Close Application?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="close_app_Description">Do you want to exit?</string>
 </resources>
