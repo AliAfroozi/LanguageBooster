@@ -5,4 +5,10 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="close_app_Description">Do you want to exit?</string>
+
+
+    <string name="notification_title">Wellcome</string>
+    <string name="notification_description">This app installed successfully and you can use it. </string>
+
+
 </resources>

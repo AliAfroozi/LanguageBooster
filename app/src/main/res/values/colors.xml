@@ -13,9 +13,9 @@
     <color name="light_shadow">#FEFEFE</color>
     <color name="dark_shadow">#DDDDDD</color>
 
-    <color name="splash_background">#D86411</color>
+    <color name="splash_background">#F96F11</color>
 
 
-    <color name="status_bar">#E3F1FA</color>
+    <color name="status_bar">#D86411</color>
 
 </resources>
