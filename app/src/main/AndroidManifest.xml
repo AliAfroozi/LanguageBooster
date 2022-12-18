@@ -11,11 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LanguageBooster">
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".AddWordActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

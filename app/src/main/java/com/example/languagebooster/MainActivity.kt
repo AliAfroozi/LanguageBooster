@@ -11,11 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.languagebooster.adaptors.RcyclerviewAdaptor
-import com.example.languagebooster.data.MockData
+import com.example.languagebooster.db.helper.WordDBHelper
 import com.example.languagebooster.models.Word
 import soup.neumorphism.NeumorphFloatingActionButton
 
@@ -23,6 +22,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var fab: NeumorphFloatingActionButton
     private lateinit var adaptor: RcyclerviewAdaptor
+
+    private lateinit var dbHelper: WordDBHelper
+    private lateinit var listWords: ArrayList<Word>
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,8 +47,9 @@ class MainActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(notificationChannel)
         }
 
-        val intent : Intent = Intent(this , MainActivity::class.java)
-        val pendingIntent : PendingIntent = PendingIntent.getActivity(this , 1 , intent , PendingIntent.FLAG_IMMUTABLE)
+        val intent: Intent = Intent(this, MainActivity::class.java)
+        val pendingIntent: PendingIntent =
+            PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_IMMUTABLE)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         val notification: Notification.Builder = Notification.Builder(this, 1.toString())
@@ -55,36 +59,32 @@ class MainActivity : AppCompatActivity() {
             .setContentIntent(pendingIntent)
 
         notificationManager.notify(1, notification.build())
+    }
 
+    override fun onResume() {
+        super.onResume()
+        listWords.clear()
+        listWords.addAll(dbHelper.getAllWords())
+        adaptor.notifyDataSetChanged()
     }
 
     private fun init() {
         bindViews()
-        adaptor = RcyclerviewAdaptor(this, MockData.getList())
+        dbHelper = WordDBHelper(this)
+        listWords = dbHelper.getAllWords()
+        adaptor = RcyclerviewAdaptor(this, listWords , dbHelper)
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adaptor
-        prepareItems()
-
-
+        fab.setOnClickListener {
+            startActivity(Intent(this, AddWordActivity::class.java))
+        }
     }
 
 
     private fun bindViews() {
         recyclerView = findViewById(R.id.mainList)
         fab = findViewById(R.id.neumorphFloatingActionButton)
-
-    }
-
-
-    private fun prepareItems() {
-        MockData.getList().clear()
-        MockData.addWord(Word("Correct", "صحیح", false))
-        MockData.addWord(Word("Mistake", "اشتباه", false))
-        MockData.addWord(Word("Love", "زید", false))
-        MockData.addWord(Word("Matrix", "جبر خطی", false))
-        MockData.addWord(Word("Ali Afroozi", "توز ", false))
-        adaptor.notifyDataSetChanged()
     }
 
 

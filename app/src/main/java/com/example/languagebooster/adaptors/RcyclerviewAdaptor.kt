@@ -8,12 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.languagebooster.R
+import com.example.languagebooster.db.helper.WordDBHelper
 import com.example.languagebooster.models.Word
 import soup.neumorphism.NeumorphImageButton
 import soup.neumorphism.NeumorphImageView
 
-class RcyclerviewAdaptor(private val context: Context, private val words: ArrayList<Word>) :
+class RcyclerviewAdaptor(private val context: Context, private val words: ArrayList<Word> , private  val dbHelper: WordDBHelper) :
     RecyclerView.Adapter<RcyclerviewAdaptor.WordHolder>() {
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordHolder {
@@ -35,6 +37,7 @@ class RcyclerviewAdaptor(private val context: Context, private val words: ArrayL
 
         holder.star.setOnClickListener { star ->
             words[position].stared = !words[position].stared
+            dbHelper.updateWord(words[position])
             setStarImage(holder, words[position])
         }
 
@@ -66,7 +69,7 @@ class RcyclerviewAdaptor(private val context: Context, private val words: ArrayL
         var img: NeumorphImageView = itemView.findViewById(R.id.img)
         var bordr: View = itemView.findViewById(R.id.border)
         override fun onClick(p0: View?) {
-            TODO("Not yet implemented")
+
         }
 
     }

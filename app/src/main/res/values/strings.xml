@@ -9,6 +9,9 @@
 
     <string name="notification_title">Wellcome</string>
     <string name="notification_description">This app installed successfully and you can use it. </string>
+    <string name="add_word">Add Word</string>
+    <string name="keyword">Keyword</string>
+    <string name="meaning">meaning</string>
 
 
 </resources>
